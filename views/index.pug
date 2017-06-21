@@ -1,0 +1,49 @@
+doctype html
+html(lang="en")
+  head
+    title Hello!
+    link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css")
+    link(rel="stylesheet", href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css")
+
+  body
+    h1 Pug - node template engine
+    #container.col
+    p You are amazing
+    p.
+      Pug is a terse and simple templating language with a
+      strong focus on performance and powerful features.
+
+    div(style="height: 400px; overflow-y: scroll")
+      table#dataTable(style="width: 80%; margin: 0 auto;", border=1)
+        thead
+          tr
+            td
+              strong ID
+            td
+              strong Inspection ID
+            td
+              strong Category
+            td
+              strong Date Reported
+            td
+              strong Date Closed
+            td
+              strong Type
+        tbody
+          each violation in data
+            tr
+              td= violation.violation_id
+              td= violation.inspection_id
+              td= violation.violation_category
+              td= violation.violation_date
+              td= violation.violation_date_closed
+              td= violation.violation_type
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+    script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    script(src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js")
+    script(type='text/javascript').
+    
+      $(document).ready(function(){
+          $('#dataTable').DataTable();
+      });
