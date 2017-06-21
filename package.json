@@ -10,9 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
-    "bootstrap": "^3.3.7",
     "express": "^4.15.3",
-    "pug": "^2.0.0-rc.2",
-    "xmlhttprequest": "^1.8.0"
+    "papaparse": "^4.3.3",
+    "pug": "^2.0.0-rc.2"
   }
 }
