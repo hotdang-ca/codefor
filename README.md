@@ -9,8 +9,10 @@ If you’d like to specify a different csv source file, provide this as an addit
 If you do not have access to Node or Npm, please [contact me](mailto:james@hotdang.ca); I will supply a demo site where you can view the app.
 
 ## Notes
-While I could have provided an analysis of all categories at once, I took the (quicker) approach of allowing the user to browse a cached copy of the raw data, and clicking on a category to get the analysis. This analysis is performed the first time a category is selected, and cached; resulting requests in that data will return the cached analysis.
-It would be a simple effort to provide a full analysis of all unique categories; you can access the currently-accumulated analysis data by browsing to http://localhost:3000/api/analyze/all.
+When you start the node server, URLs are provided; the root is the front-end, with four options along the top. "View Raw Data" allows you to see the JSON data of the raw CSV url.
+"View Cached Analysis Data" will show you the analysis that was performed on that data.
+"View Summary" will show the analysis of each Violation type. "View All Data" displays a table of the raw data, with DataTables enhancements (sort, search, pagination). clicking
+on a violation type will show the analysis for just that violation.
 
 ## Contact
 The author, James Robert Perih, can be contacted via email, james@hotdang.ca, or phone, 204-995-9502.

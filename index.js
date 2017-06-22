@@ -138,6 +138,18 @@ app.get('/api/rawdata', (req, res, next) => {
 /* Time to start! */
 init(process.argv.slice(2)[0] || DEFAULT_URL).then((response) => {
   cachedParsedData = response.data;
+  // analyze all
+
+  const analyzeStartTime = Date.now();
+  console.log('Starting analysis...');
+  response.data.forEach((incident) => {
+    if (! cachedAnalysis[incident.violation_type]) {
+      analyzeType(incident.violation_type);
+    }
+  });
+  const analyzeDuration = (Date.now() - analyzeStartTime);
+  console.log(`Completed analysis in ${analyzeDuration}ms`);
+
   const PORT = 3000;
   app.listen(PORT, () => {
     console.log(`${process.argv.slice(2)[0] ? 'Custom' : 'Default' } data cached and example app listening on port 3000!`);
