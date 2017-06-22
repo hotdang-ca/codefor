@@ -7,43 +7,82 @@ html(lang="en")
     link(rel="stylesheet", href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css")
 
   body
-    h1 Pug - node template engine
-    #container.col
-    p You are amazing
-    p.
-      Pug is a terse and simple templating language with a
-      strong focus on performance and powerful features.
+    div(class="jumbotron")
+      h1 Data Analysis
+      #container.col
+      p Select an incident type to get info.
+      p
+        a(href="/api/rawdata", target="_blank") View Raw Data
+        | 
+        a(href="/api/analyze/all", target="_blank") View Cached Analysis Data
 
-    div(style="height: 400px; overflow-y: scroll")
-      table#dataTable(style="width: 80%; margin: 0 auto;", border=1)
-        thead
-          tr
-            td
-              strong ID
-            td
-              strong Inspection ID
-            td
-              strong Category
-            td
-              strong Date Reported
-            td
-              strong Date Closed
-            td
-              strong Type
-        tbody
-          each violation in data
+      h6 Written by <a href="mailto:james@hotdang.ca">James Perih</a>, in Regina, Canada.
+
+    div(class="container")
+
+      p#data().
+        Data will appear here when you select an incident type
+
+      div(class="well")
+        table#dataTable(class="table", style="width: 80%; margin: 0 auto;", border=1)
+          thead
             tr
-              td= violation.violation_id
-              td= violation.inspection_id
-              td= violation.violation_category
-              td= violation.violation_date
-              td= violation.violation_date_closed
-              td= violation.violation_type
+              td
+                strong ID
+              td
+                strong Inspection ID
+              td
+                strong Category
+              td
+                strong Date Reported
+              td
+                strong Date Closed
+              td
+                strong Type
+          tbody
+            each violation in data
+              tr
+                td= violation.violation_id
+                td= violation.inspection_id
+                td= violation.violation_category
+                td= violation.violation_date
+                td= violation.violation_date_closed
+                td
+                  a(style="cursor: pointer", id=violation.violation_type, onclick='getAnalysisFor(this.id)')= violation.violation_type
+
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
     script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js")
     script(type='text/javascript').
-    
+
       $(document).ready(function(){
           $('#dataTable').DataTable();
       });
+
+    script(type='text/javascript').
+
+      function getAnalysisFor(type) {
+        var xml = new XMLHttpRequest();
+        xml.onreadystatechange = function() {
+          if (xml.readyState == 4 && xml.status == 200) {
+            var results = JSON.parse(xml.responseText);
+            var analysisString = `
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">${type}</h3>
+                </div>
+                <div class="panel-body">
+                  <strong>Count: </strong>${results.incidentCount}<br/>
+                  <strong>Earliest Incident: </strong>${new Date(results.earliestIncident).toDateString()}<br />
+                  <strong>Latest Incident: </strong>${new Date(results.latestIncident).toDateString()}
+                </div>
+              </div>`;
+
+            document.getElementById("data").innerHTML = analysisString;
+            window.scroll(0, 0);
+          };
+        };
+
+        xml.open("GET", "/api/analyze/" + type, true);
+        xml.send();
+      }
