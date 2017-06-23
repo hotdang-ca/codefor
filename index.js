@@ -150,7 +150,7 @@ init(process.argv.slice(2)[0] || DEFAULT_URL).then((response) => {
   const analyzeDuration = (Date.now() - analyzeStartTime);
   console.log(`Completed analysis in ${analyzeDuration}ms`);
 
-  const port = (process.env.PORT || 3000);
+  const PORT = (process.env.PORT || 3000);
   app.listen(PORT, () => {
     console.log(`${process.argv.slice(2)[0] ? 'Custom' : 'Default' } data cached and example app listening on port 3000!`);
     console.log('');
@@ -161,5 +161,5 @@ init(process.argv.slice(2)[0] || DEFAULT_URL).then((response) => {
     console.log(`  http://${os.hostname()}:${PORT}/api/analyze/all - JSON output of cached analysis`);
   });
 }).catch((error) => {
-  console.log(`Error getting data from URL specified: ${DEFAULT_URL}`);
+  console.log(error);
 });
