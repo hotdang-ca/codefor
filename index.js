@@ -161,5 +161,5 @@ init(process.argv.slice(2)[0] || DEFAULT_URL).then((response) => {
     console.log(`  http://${os.hostname()}:${PORT}/api/analyze/all - JSON output of cached analysis`);
   });
 }).catch((error) => {
-  console.log(`Error getting data from URL specified: ${DATA_URL}`);
+  console.log(`Error getting data from URL specified: ${DEFAULT_URL}`);
 });
