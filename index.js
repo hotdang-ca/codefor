@@ -150,7 +150,7 @@ init(process.argv.slice(2)[0] || DEFAULT_URL).then((response) => {
   const analyzeDuration = (Date.now() - analyzeStartTime);
   console.log(`Completed analysis in ${analyzeDuration}ms`);
 
-  const PORT = 3000;
+  const port = (process.env.PORT || 3000);
   app.listen(PORT, () => {
     console.log(`${process.argv.slice(2)[0] ? 'Custom' : 'Default' } data cached and example app listening on port 3000!`);
     console.log('');
@@ -162,4 +162,4 @@ init(process.argv.slice(2)[0] || DEFAULT_URL).then((response) => {
   });
 }).catch((error) => {
   console.log(`Error getting data from URL specified: ${DATA_URL}`);
-})
+});
