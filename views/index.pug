@@ -12,14 +12,13 @@ html(lang="en")
       #container.col
       p Select an incident type to get info.
       p
-        a(href="/api/rawdata", target="_blank") View Raw Data
-        span &nbsp;|&nbsp;
-        a(href="/api/analyze/all", target="_blank") View Cached Analysis Data
-        span &nbsp;|&nbsp;
         a(onclick='getAnalysisForAll()') View Summary
         span &nbsp;|&nbsp;
         a(onclick='getTableData()') View All Data
-
+        span &nbsp;|&nbsp;
+        a(href="/api/rawdata", target="_blank") View Raw Data
+        span &nbsp;|&nbsp;
+        a(href="/api/analyze/all", target="_blank") View Cached Analysis Data
       h6 Written by <a href="mailto:james@hotdang.ca">James Perih</a>, in Regina, Canada.
 
     div(class="container")

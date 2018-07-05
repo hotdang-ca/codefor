@@ -3,7 +3,12 @@ const express = require('express');
 const os = require("os");
 const axios = require('axios');
 const pug = require('pug');
-const DEFAULT_URL = 'http://codefor.ca/wp-content/uploads/2017/06/dev-challenge-data.csv';
+
+// Last year's file
+// const DEFAULT_URL = 'http://codefor.ca/wp-content/uploads/2017/06/dev-challenge-data.csv';
+
+// This year's file
+const DEFAULT_URL = 'http://codefor.ca/wp-content/uploads/2018/06/C4C-dev-challenge-2018.csv';
 
 let cachedParsedData = undefined;
 let cachedAnalysis = {};
